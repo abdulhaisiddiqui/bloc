@@ -3,16 +3,17 @@ import 'package:counterapp/bloc/imagePicker/image_picker_bloc.dart';
 import 'package:counterapp/bloc/like/like_bloc.dart';
 import 'package:counterapp/bloc/login/login_bloc.dart';
 import 'package:counterapp/bloc/switch/switch_bloc.dart';
+import 'package:counterapp/cubit/todo_cubit.dart';
 import 'package:counterapp/utils/image_picker_utils.dart';
 import 'package:counterapp/views/counter_screen.dart';
 import 'package:counterapp/views/image_picker_screen.dart';
 import 'package:counterapp/views/login_screen.dart';
 import 'package:counterapp/views/switch_screen.dart';
+import 'package:counterapp/views/todo_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-void main (){
+void main() {
   runApp(MyApp());
 }
 
@@ -22,15 +23,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-      BlocProvider(create: (_) => CounterBloc()),
-      BlocProvider(create: (_) => SwitchBloc()),
-      BlocProvider(create: (_) => LoginBloc()),
-      BlocProvider(create: (_) => LikeBloc()),
-      BlocProvider(create: (_) => ImagePickerBloc(ImagePickerUtils())),
-    ], child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
-    ));
+      providers: [
+        BlocProvider(create: (_) => CounterBloc()),
+        BlocProvider(create: (_) => SwitchBloc()),
+        BlocProvider(create: (_) => LoginBloc()),
+        BlocProvider(create: (_) => LikeBloc()),
+        BlocProvider(create: (_) => TodoCubit()),
+        BlocProvider(create: (_) => ImagePickerBloc(ImagePickerUtils())),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: TodoList(),
+      ),
+    );
   }
 }
